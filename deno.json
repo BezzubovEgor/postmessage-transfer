@@ -1,6 +1,6 @@
 {
   "name": "@lynkxy/postmessage-transfer",
-  "description": "A package for sending objects via post message with support for serializing messages with proxy functions and sending them via post message channel across all major platforms including web, Node.js, Deno, etc.",
+  "description": "`@lynkxy/postmessage-transfer` is a small, efficient library that simplifies sending and receiving objects, messages and even functions between different threads in different environments via postMessage channel.",
   "version": "0.0.3",
   "license": "MIT",
   "exports": "./src/index.ts",
