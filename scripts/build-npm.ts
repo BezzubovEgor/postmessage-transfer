@@ -17,6 +17,7 @@ await build({
     version: denoJson.version,
     description: denoJson.description,
     license: denoJson.license,
+    private: false,
     repository: {
       type: "git",
       url: "git+https://github.com/username/repo.git",
