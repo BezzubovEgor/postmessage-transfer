@@ -22,7 +22,7 @@ jobs:
 
       - uses: denoland/setup-deno@v2
 
-      - run: deno build:npm
+      - run: deno run build:npm
       - run: cd npm
       - run: npm ci
       - run: npm publish --provenance --access public
