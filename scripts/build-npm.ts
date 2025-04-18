@@ -20,10 +20,10 @@ await build({
     private: false,
     repository: {
       type: "git",
-      url: "git+https://github.com/username/repo.git",
+      url: "git+https://github.com/BezzubovEgor/postmessage-transfer.git",
     },
     bugs: {
-      url: "https://github.com/username/repo/issues",
+      url: "https://github.com/BezzubovEgor/postmessage-transfer/issues",
     },
   },
   postBuild() {
