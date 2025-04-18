@@ -24,6 +24,6 @@ jobs:
 
       - run: deno run build:npm
       - run: cd npm
-      - run: npm publish --provenance --access public
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
