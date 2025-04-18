@@ -104,6 +104,24 @@ function deserializeFunction(serializedFn: SerializedFunction) {
   return deserializedProxyFunction;
 }
 
+/**
+ * Serializes data to be transferred via MessageChannel
+ * @param data - The data to serialize
+ * @returns A tuple containing [serialized data, transferable objects]
+ * The first element is the serialized data
+ * The second element is an object with a transfer array containing all Transferable objects
+ *
+ * Supported transferable data types:
+ * - ArrayBuffer and views (Uint8Array, Float32Array, etc.)
+ * - MessagePort
+ * - ImageBitmap
+ * - OffscreenCanvas
+ * - AudioData
+ * - VideoFrame
+ * - ReadableStream, WritableStream, TransformStream
+ * - Blob (converted to ArrayBuffer before transfer)
+ * - Functions (converted to serialized proxies with MessagePort)
+ */
 export async function serialize(
   data: unknown,
 ): Promise<[unknown, { transfer: Transferable[] }]> {
@@ -151,6 +169,20 @@ export async function serialize(
   return [await serializeSlice(data), { transfer }];
 }
 
+/**
+ * Deserializes data received via MessageChannel
+ *
+ * @template T - The expected return type
+ * @param data - The data to deserialize
+ * @returns The deserialized data as type T
+ *
+ * Handles deserialization of:
+ * - Serialized functions (converts back to callable functions)
+ * - Serialized errors (converted to Error objects)
+ * - Arrays (recursively deserializes each element)
+ * - Objects (recursively deserializes each property)
+ * - Primitive values (returned as-is)
+ */
 export function deserialize<T = unknown>(data: unknown): T {
   if (data === null || !isObject(data)) {
     return data as T;

@@ -37,5 +37,22 @@ export function isSerializedError(val: unknown): val is SerializedError {
 }
 
 export function isTransferableObject(obj: unknown): obj is Transferable {
-  return obj instanceof ArrayBuffer;
+  return (
+    obj instanceof ArrayBuffer ||
+    obj instanceof MessagePort ||
+    ("ImageBitmap" in globalThis && obj instanceof ImageBitmap) ||
+    ("ReadableStream" in globalThis && obj instanceof ReadableStream) ||
+    ("WritableStream" in globalThis && obj instanceof WritableStream) ||
+    ("TransformStream" in globalThis && obj instanceof TransformStream) ||
+    ("OffscreenCanvas" in globalThis &&
+      // @ts-ignore: OffscreenCanvas may not be available in all environments
+      obj instanceof OffscreenCanvas) ||
+    ("AudioData" in globalThis &&
+      // @ts-ignore: AudioData may not be available in all environments
+      obj instanceof AudioData) ||
+    ("VideoFrame" in globalThis &&
+      // @ts-ignore: VideoFrame may not be available in all environments
+      obj instanceof VideoFrame) ||
+    ArrayBuffer.isView(obj)
+  );
 }
