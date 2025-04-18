@@ -23,7 +23,6 @@ jobs:
       - uses: denoland/setup-deno@v2
 
       - run: deno run build:npm
-      - run: cd npm
-      - run: npm publish
+      - run: cd npm && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
